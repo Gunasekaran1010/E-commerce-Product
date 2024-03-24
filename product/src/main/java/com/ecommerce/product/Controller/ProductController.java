@@ -19,6 +19,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    // Create a New Product
     @PostMapping("/products/{catid}")
     @ResponseBody
     public Product craeteproduct(@RequestBody Product product , @PathVariable int catid){
@@ -27,6 +28,9 @@ public class ProductController {
         return  res ;
     }
 
+
+
+    // Get ALl Product List and also page wise also we can get
     @GetMapping("/products")
     public ProductResponse getallproduct(@RequestParam(value = "page", defaultValue = AppConstants.PAGE_NUMBER_STRING) int page,
                                          @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE_STRING) int pageSize,
@@ -44,17 +48,23 @@ public class ProductController {
     }
 
 
+    // Get a Product using an ID
+
     @GetMapping("/products/{id}")
     public ProductDTO getproductbyid(@PathVariable int id){
         ProductDTO p = productService.getProductById(id);
         return  p ;
     }
 
+
+    // Delete a  Single Product Using ID
     @DeleteMapping("/products/{id}")
     public void deletebyids(@PathVariable int id){
         productService.deletebyid(id);
     }
 
+
+    // Update Product Using a ID
     @PutMapping("/products/{id}")
     public Product Updatethat(@PathVariable int id , @RequestBody Product P){
         Product ps = productService.UpadteProduct(id,P);

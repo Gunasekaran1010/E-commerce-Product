@@ -29,6 +29,9 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
+
+    // Update a Single Product
     public  Product UpadteProduct(int id, Product p) {
 
         Product oldpro = productRepository.findById(id);
@@ -45,6 +48,7 @@ public class ProductService {
         return  save ;
     }
 
+    // Create a new Product
     public Product createproduct(Product product, int catid) {
 
         Category cat = categoryRepository.findById(catid);
@@ -52,6 +56,10 @@ public class ProductService {
         Product res = productRepository.save(product);
         return  res ;
     }
+
+
+
+    // Get all Product List
 
     public List<ProductDTO> getall(){
         List<Product> all =   productRepository.findAll();
@@ -77,6 +85,8 @@ public class ProductService {
         return productDTOs;
     }
 
+
+    // Get ALl the product in page wise
     public ProductResponse getallproducts(int page , int pageSize , String sortBy , String sortDir ){
         int adjustedPage = page - 1;
 
@@ -109,6 +119,7 @@ public class ProductService {
         return  response;
     }
 
+    // Product to ProductDTO
     private ProductDTO convertToProductDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(product.getProductId());
@@ -131,12 +142,9 @@ public class ProductService {
 
 
 
-//    public Product getprobyid(int productid) {
-//
-//        Product ps = productRepository.findById(productid);
-//        return  ps ;
-//    }
 
+
+    // Get single Product Using a ID
     public ProductDTO getProductById(int productId) {
         Product product = productRepository.findById(productId);
         if (product == null) {
@@ -163,7 +171,16 @@ public class ProductService {
     }
 
 
+    // Delete a Product Using a ID
     public  void deletebyid(int id){
         productRepository.deleteById(id);
     }
 }
+
+
+
+//    public Product getprobyid(int productid) {
+//
+//        Product ps = productRepository.findById(productid);
+//        return  ps ;
+//    }

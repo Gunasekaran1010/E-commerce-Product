@@ -25,11 +25,14 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
 
+    // new category create implementation
     public Category create(Category category){
         Category cs = categoryRepository.save(category);
         return  cs;
     }
 
+
+    // Category Update Function Implementation
     public  Category upadte(int id, Category category)
     {
         Category old = categoryRepository.findById(id);
@@ -40,6 +43,7 @@ public class CategoryService {
     }
 
 
+    // Category Delete Function Implementation
     public  void  delete(int id){
 
 
@@ -48,11 +52,10 @@ public class CategoryService {
 
     }
 
-//    public  Category getbyid(int catoryid){
-//        Category newid = categoryRepository.findById(catoryid);
-//        return  newid ;
-//    }
 
+
+
+    // Getting a Single Category Using ID Function Implementation
     public CategoryDTO getCategoryById(int categoryId) {
         Category category = categoryRepository.findById(categoryId);
         CategoryDTO categoryDTO = new CategoryDTO();
@@ -65,6 +68,8 @@ public class CategoryService {
         categoryDTO.setProducts(productDTOs);
         return categoryDTO;
     }
+
+    // Product to ProductDTO
 
     private ProductDTO convertToProductDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
@@ -85,11 +90,15 @@ public class CategoryService {
 
         return productDTO;
     }
+
+
+    // Get all Category
     public List<Category> getalls(){
         List<Category> findall = categoryRepository.findAll();
         return  findall ;
     }
 
+    // Get ALl Category in page wise
     public CategoryResponse getall(int pageNumber , int pageSize , String sortBy , String sortDir ){
         int adjustment = pageNumber -1 ;
         Sort sort = null;
@@ -107,8 +116,6 @@ public class CategoryService {
         // List<Product> collect =   pageProduct.stream().filter(p -> p.getisLive()).collect(Collectors.toList());
         List<CategoryDTO> productDTOS = pageProduct.stream().map( p -> convertToCategoryDTO(p)).collect(Collectors.toList());
 
-//        return productRepository.findAll();
-
         CategoryResponse response = new CategoryResponse();
         response.setContent(productDTOS);
         response.setPageNumber(page.getNumber() + 1);
@@ -121,6 +128,8 @@ public class CategoryService {
         return  response;
     }
 
+
+    // Convert Category to CategoryDTO
     public  CategoryDTO convertToCategoryDTO(Category category){
         CategoryDTO categoryDTO = new CategoryDTO();
 
@@ -137,3 +146,9 @@ public class CategoryService {
 
 
 }
+
+
+//    public  Category getbyid(int catoryid){
+//        Category newid = categoryRepository.findById(catoryid);
+//        return  newid ;
+//    }

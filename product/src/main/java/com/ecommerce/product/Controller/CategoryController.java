@@ -25,18 +25,25 @@ public class CategoryController {
     private CategoryService categoryService;
 
 
+    // Create a New Category
     @PostMapping("/categories")
     public ResponseEntity<Category> create(@RequestBody Category category){
         Category created = categoryService.create(category);
         return new ResponseEntity<Category>(created , HttpStatus.OK);
     }
 
+
+
+    // Update a Existing Category using Category ID
     @PutExchange("/categories/{id}")
     public ResponseEntity<Category> upadte( @PathVariable int id ,@RequestBody Category category){
         Category update = categoryService.upadte(id ,category);
         return new ResponseEntity<Category>(update , HttpStatus.OK);
     }
 
+
+
+    // Delete a Category Using ID
     @DeleteMapping("/categories/{id}")
     public  String delete(@PathVariable int id){
         categoryService.delete(id);
@@ -44,24 +51,16 @@ public class CategoryController {
 
     }
 
-//    @GetMapping("/category/{id}")
-//    public  ResponseEntity<Category> getbyid (@PathVariable int id){
-//        Category values = categoryService.getbyid(id);
-//        return new ResponseEntity<Category>(values , HttpStatus.OK);
-//
-//    }
-@GetMapping("/categories/{id}")
-public CategoryDTO getCategoryById(@PathVariable int id){
-    return categoryService.getCategoryById(id);
-}
 
-//    @GetMapping("/category")
-//    public  ResponseEntity<List<Category>> allcatrgory(){
-//
-//        List<Category> allfind = categoryService.getall();
-//        return new  ResponseEntity<List<Category>>(allfind , HttpStatus.OK);
-//    }
+        // Get a One Category Using ID
+        @GetMapping("/categories/{id}")
+        public CategoryDTO getCategoryById(@PathVariable int id){
+                     return categoryService.getCategoryById(id);
+        }
 
+
+
+    // Get all Category and also we get page wise also we get a Category
     @GetMapping("/categories")
     public ResponseEntity<CategoryResponse> getallcategory(
             @RequestParam(value = "page", defaultValue = CategoryAppConstant.PAGE_NUMBER_STRING) int page,
@@ -82,4 +81,19 @@ public CategoryDTO getCategoryById(@PathVariable int id){
         }
     }
 }
+
+
+//    @GetMapping("/category")
+//    public  ResponseEntity<List<Category>> allcatrgory(){
+//
+//        List<Category> allfind = categoryService.getall();
+//        return new  ResponseEntity<List<Category>>(allfind , HttpStatus.OK);
+//    }
+
+//    @GetMapping("/category/{id}")
+//    public  ResponseEntity<Category> getbyid (@PathVariable int id){
+//        Category values = categoryService.getbyid(id);
+//        return new ResponseEntity<Category>(values , HttpStatus.OK);
+//
+//    }
 
