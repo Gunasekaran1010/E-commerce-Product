@@ -47,7 +47,7 @@ To run this project locally, follow these steps:
 | PUT      | `/api/categories/{id}` | Updates an existing category. |
 | DELETE   | `/api/categories/{id}` | Deletes a category by its ID. |
 | GET      | `/api/categories/{id}` | Retrieves a category by its ID. |
-| GET      | `/api/categories`   | Retrieves all categories with pagination support. |
+| GET      | `/api/categories?page=3`   | Retrieves all categories with pagination support. |
 
 ### Product Controller
 
@@ -57,7 +57,7 @@ To run this project locally, follow these steps:
 | PUT      | `/api/products/{id}`    | Updates an existing product.              |
 | DELETE   | `/api/products/{id}`    | Deletes a product by its ID.              |
 | GET      | `/api/products/{id}`    | Retrieves a product by its ID.            |
-| GET      | `/api/products`      | Retrieves all products with pagination support.  |
+| GET      | `/api/products/?page=2`      | Retrieves all products with pagination support.  |
 
 ## Contribution
 
