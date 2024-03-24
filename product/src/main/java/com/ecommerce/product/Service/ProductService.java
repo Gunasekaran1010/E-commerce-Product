@@ -73,10 +73,15 @@ public class ProductService {
             productDTO.setProductName(product.getProductName());
             productDTO.setProductPrize(product.getProductPrize());
             productDTO.setProductDesc(product.getProductDesc());
+            productDTO.setStock(product.getisStock());
+            productDTO.setProductQuantity(product.getProductQuantity());
+            productDTO.setLive(product.getisLive());
+            productDTO.setImageName(product.getImageName());
 
 
             if (product.getCategory() != null) {
                 productDTO.setCategoryId(product.getCategory().getCategoryID());
+                productDTO.setTittle(product.getCategory().getTitle());
             }
 
             productDTOs.add(productDTO);

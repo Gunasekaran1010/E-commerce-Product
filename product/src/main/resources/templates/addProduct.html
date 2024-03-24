@@ -7,20 +7,49 @@
 </head>
 <body>
 
+<!-- HTML Form for adding a new product -->
 <div class="container mt-4">
     <h2>Add Product</h2>
     <form action="/saveProduct" method="post">
+        <!-- Input field for Product ID -->
+        <div class="form-group">
+            <label for="productId">Product ID</label>
+            <input type="text" class="form-control" id="productId" name="productId" th:value="${productDTO.productId}" readonly>
+        </div>
+        <!-- Input field for Product Name -->
         <div class="form-group">
             <label for="productName">Product Name</label>
-            <input type="text" class="form-control" id="productName" name="productName" required>
+            <input type="text" class="form-control" id="productName" name="productName" th:value="${productDTO.productName}" required>
         </div>
+        <!-- Input field for Product Description -->
         <div class="form-group">
             <label for="productDesc">Description</label>
-            <input type="text" class="form-control" id="productDesc" name="productDesc" required>
+            <input type="text" class="form-control" id="productDesc" name="productDesc" th:value="${productDTO.productDesc}" required>
         </div>
+        <!-- Input field for Product Price -->
         <div class="form-group">
             <label for="productPrice">Price</label>
-            <input type="number" class="form-control" id="productPrice" name="productPrice" required>
+            <input type="number" class="form-control" id="productPrice" name="productPrice" th:value="${productDTO.productPrize}" required>
+        </div>
+        <!-- Input field for Product Stock -->
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="checkbox" id="stock" name="stock" th:checked="${productDTO.stock}">
+        </div>
+        <!-- Input field for Product Quantity -->
+        <div class="form-group">
+            <label for="productQuantity">Quantity</label>
+            <input type="number" class="form-control" id="productQuantity" name="productQuantity" th:value="${productDTO.productQuantity}" required>
+        </div>
+        <!-- Input field for Product Live -->
+        <div class="form-group">
+            <label for="live">Live</label>
+            <input type="checkbox" id="live" name="live" th:checked="${productDTO.live}">
+        </div>
+        <!-- Input field for Product Image Name -->
+        <div class="form-group">
+            <label for="imageName">Image Name</label>
+            <input type="text" class="form-control" id="imageName" name="imageName" th:value="${productDTO.imageName}">
         </div>
         <div class="form-group">
             <label for="category">Category</label>
@@ -28,9 +57,11 @@
                 <option th:each="category : ${categories}" th:value="${category.categoryID}" th:text="${category.title}"></option>
             </select>
         </div>
+
         <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

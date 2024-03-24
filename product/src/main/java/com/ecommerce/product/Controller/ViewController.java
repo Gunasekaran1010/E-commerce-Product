@@ -57,8 +57,11 @@ public class ViewController {
 
     @GetMapping("/addProduct")
     public String showProductForm(Model model) {
+        ProductDTO productDTO = new ProductDTO();
+        model.addAttribute("productDTO", productDTO);
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getalls());
+
         return "addProduct"; // Assuming you have a Thymeleaf template named "addProduct.html" for adding products
     }
 
