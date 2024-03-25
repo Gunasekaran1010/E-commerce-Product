@@ -29,7 +29,7 @@ To run this project locally, follow these steps:
 2. Configure MySQL database settings in the `application.properties` file.
 3. Build the project using Maven.
 4. Run the Spring Boot application.
-5. Access the application in your web browser at `http://localhost:8080`.
+5. Access the application in your web browser at `http://localhost:8080/landing`.
 
 ## Usage
 
