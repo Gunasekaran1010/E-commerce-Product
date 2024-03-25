@@ -4,10 +4,7 @@ package com.ecommerce.product.Controller;
 import com.ecommerce.product.Model.Category;
 import com.ecommerce.product.Service.CategoryService;
 import com.ecommerce.product.dto.CategoryDTO;
-import com.ecommerce.product.payload.AppConstants;
-import com.ecommerce.product.payload.CategoryAppConstant;
-import com.ecommerce.product.payload.CategoryResponse;
-import com.ecommerce.product.payload.ProductResponse;
+import com.ecommerce.product.payload.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -25,6 +22,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
 
+    //Format for create Categories
+//    {
+//        "title" : "Bags"
+//    }
+
+
+
     // Create a New Category
     @PostMapping("/categories")
     public ResponseEntity<Category> create(@RequestBody Category category){
@@ -34,12 +38,13 @@ public class CategoryController {
 
 
 
-    // Update a Existing Category using Category ID
-    @PutExchange("/categories/{id}")
-    public ResponseEntity<Category> upadte( @PathVariable int id ,@RequestBody Category category){
-        Category update = categoryService.upadte(id ,category);
-        return new ResponseEntity<Category>(update , HttpStatus.OK);
+// Update Category
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<CategoryRes> updateCategory(@PathVariable int id, @RequestBody Category category) {
+        CategoryRes updatedCategory = categoryService.update(id, category);
+        return ResponseEntity.ok(updatedCategory);
     }
+
 
 
 
@@ -97,3 +102,10 @@ public class CategoryController {
 //
 //    }
 
+
+// Update a Existing Category using Category ID
+//    @PutExchange("/categories/{id}")
+//    public ResponseEntity<CategoryDTO> upadte( @PathVariable int id ,@RequestBody Category category){
+//        CategoryDTO update = categoryService.upadte(id ,category);
+//        return new ResponseEntity<CategoryDTO>(update , HttpStatus.OK);
+//    }
