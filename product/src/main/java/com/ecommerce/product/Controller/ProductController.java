@@ -1,7 +1,10 @@
 package com.ecommerce.product.Controller;
 
 
+import com.ecommerce.product.Model.Category;
 import com.ecommerce.product.Model.Product;
+import com.ecommerce.product.Repository.CategoryRepository;
+import com.ecommerce.product.Service.CategoryService;
 import com.ecommerce.product.Service.ProductService;
 import com.ecommerce.product.dto.ProductDTO;
 import com.ecommerce.product.exception.ServiceException;
@@ -18,15 +21,44 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    // Create a New Product
-    @PostMapping("/products/{catid}")
+
+
+
+    //For Creating Product body Structure Should be below like
+//    {
+//        "productName" : "ce",
+//            "productDesc" : "Most Famous mobile",
+//            "productPrize" : 11233,
+//            "stock" : true,
+//            "productQuantity" : 43,
+//            "live" : true ,
+//            "imageName" : "image12.jpg",
+//            "categoryId": 252 // Product what category need enter category id
+//    }
+
+
+    // Create a New Product Implementation
+    @PostMapping("/products")
     @ResponseBody
-    public Product craeteproduct(@RequestBody Product product , @PathVariable int catid){
+    public Product createProduct(@RequestBody ProductDTO productDTO) {
+        Category category = categoryRepository.findById(productDTO.getCategoryId());
+        Product product = new Product();
+        product.setProductName(productDTO.getProductName());
+        product.setProductDesc(productDTO.getProductDesc());
+        product.setProductPrize(productDTO.getProductPrize());
+        product.setStock(productDTO.isStock());
+        product.setProductQuantity(productDTO.getProductQuantity());
+        product.setLive(productDTO.isLive());
+        product.setImageName(productDTO.getImageName());
+        product.setCategory(category);
 
-        Product res = productService.createproduct(product, catid);
-        return  res ;
+        Product savedProduct = productService.createProduct(product);
+        return savedProduct;
     }
+
 
 
 
@@ -59,8 +91,9 @@ public class ProductController {
 
     // Delete a  Single Product Using ID
     @DeleteMapping("/products/{id}")
-    public void deletebyids(@PathVariable int id){
+    public String deletebyids(@PathVariable int id){
         productService.deletebyid(id);
+        return  "deleted Successfully";
     }
 
 
@@ -71,3 +104,13 @@ public class ProductController {
         return  ps ;
     }
 }
+
+
+// Create a New Product
+//    @PostMapping("/products/{catid}")
+//    @ResponseBody
+//    public Product craeteproduct(@RequestBody Product product , @PathVariable int catid){
+//
+//        Product res = productService.createproduct(product, catid);
+//        return  res ;
+//    }

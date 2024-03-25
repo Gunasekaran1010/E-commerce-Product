@@ -49,13 +49,19 @@ public class ProductService {
     }
 
     // Create a new Product
-    public Product createproduct(Product product, int catid) {
+//    public Product createproduct(Product product, int catid) {
+//
+//        Category cat = categoryRepository.findById(catid);
+//        product.setCategory(cat);
+//        Product res = productRepository.save(product);
+//        return  res ;
+//    }
 
-        Category cat = categoryRepository.findById(catid);
-        product.setCategory(cat);
-        Product res = productRepository.save(product);
-        return  res ;
+    public Product createProduct(Product product) {
+        Product savedProduct = productRepository.save(product);
+        return savedProduct;
     }
+
 
 
 

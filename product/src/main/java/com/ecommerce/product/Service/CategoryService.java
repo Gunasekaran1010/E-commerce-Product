@@ -6,6 +6,7 @@ import com.ecommerce.product.Model.Product;
 import com.ecommerce.product.Repository.CategoryRepository;
 import com.ecommerce.product.dto.CategoryDTO;
 import com.ecommerce.product.dto.ProductDTO;
+import com.ecommerce.product.payload.CategoryRes;
 import com.ecommerce.product.payload.CategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,16 +32,17 @@ public class CategoryService {
         return  cs;
     }
 
-
-    // Category Update Function Implementation
-    public  Category upadte(int id, Category category)
-    {
+// Update a Category using id
+    public CategoryRes update(int id, Category category) {
         Category old = categoryRepository.findById(id);
-        old.setProduct(category.getProduct());
-        old.setTitle(category.getTitle());
+        CategoryRes categoryRes = new CategoryRes();
+        categoryRes.setCategoryId(old.getCategoryID());
+        categoryRes.setTitle(old.getTitle());
+        categoryRepository.save(old);
 
-        return  old;
+        return  categoryRes;
     }
+
 
 
     // Category Delete Function Implementation
@@ -151,4 +153,22 @@ public class CategoryService {
 //    public  Category getbyid(int catoryid){
 //        Category newid = categoryRepository.findById(catoryid);
 //        return  newid ;
+//    }
+
+
+// Category Update Function Implementation
+//    public  CategoryDTO upadte(int id, Category category)
+//    {
+//        Category old = categoryRepository.findById(id);
+//        old.setProduct(category.getProduct());
+//        old.setTitle(category.getTitle());
+//        Category category1 =categoryRepository.save(old);
+//        CategoryDTO categoryDTO = new CategoryDTO();
+//        categoryDTO.setCategoryId(category1.getCategoryID());
+//        categoryDTO.setTitle(category1.getTitle());
+//
+//        List<ProductDTO> productDTOS = category.getProduct().stream().map(this::convertToProductDTO).collect(Collectors.toList());
+//        categoryDTO.setProducts(productDTOS);
+//
+//        return  categoryDTO;
 //    }
