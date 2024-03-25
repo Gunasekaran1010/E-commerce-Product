@@ -35,6 +35,7 @@ public class CategoryService {
 // Update a Category using id
     public CategoryRes update(int id, Category category) {
         Category old = categoryRepository.findById(id);
+        old.setTitle(category.getTitle());
         CategoryRes categoryRes = new CategoryRes();
         categoryRes.setCategoryId(old.getCategoryID());
         categoryRes.setTitle(old.getTitle());

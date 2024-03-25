@@ -43,10 +43,44 @@ public class ViewController {
         return "view";
     }
 
+    @GetMapping("/productview")
+    public String viewproduct(Model model){
+        List<ProductDTO> products = productService.getall();
+        model.addAttribute("products", products);
+
+        return "viewproduct";
+
+    }
+
+    @GetMapping("/landing")
+    public String landingpage(Model model){
+
+        return "landing";
+
+
+    }
+
+    @GetMapping("/backtomain")
+    public String backtomain(Model model){
+        return "landing";
+    }
+
+    @GetMapping("/cancelp")
+    public  String cancelp(Model model){
+        return "viewproduct";
+    }
+
+    @GetMapping("/cancelc")
+    public  String cancelc(Model model){
+        return "view";
+    }
+
+
+
     @GetMapping("/addCategory")
     public String showCategoryForm(Model model) {
         model.addAttribute("category", new Category());
-        return "addCategory"; // Assuming you have a Thymeleaf template named "addCategory.html" for adding categories
+        return "addCategory";
     }
 
     @PostMapping("/saveCategory")
@@ -62,12 +96,12 @@ public class ViewController {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getalls());
 
-        return "addProduct"; // Assuming you have a Thymeleaf template named "addProduct.html" for adding products
+        return "addProduct";
     }
 
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("product") Product product) {
         viewService.saveProduct(product);
-        return "redirect:/view"; // Redirect to the products page after adding a product
+        return "redirect:/productview"; // Redirect to the products page after adding a product
     }
 }
