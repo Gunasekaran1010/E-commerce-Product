@@ -59,6 +59,4 @@ To run this project locally, follow these steps:
 | GET      | `/api/products/{id}`    | Retrieves a product by its ID.            |
 | GET      | `/api/products/?page=2`      | Retrieves all products with pagination support.  |
 
-## Contribution
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
